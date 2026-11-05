@@ -45,6 +45,7 @@ if __name__ == '__main__':
                 log_memory_type = 'new_memory' if read_db else 'no_memory'
                 log_base = f'{log_path}/{defense_type}' if defense_type else f'{log_path}/{log_memory_type}'
                 log_file = f'{log_base}/{attack_type}-{attack_tool_type}'
+                log_file = log_file.replace(":", "_")
                 os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
 
@@ -72,8 +73,8 @@ if __name__ == '__main__':
                 else:
                     specific_cmd = ''
 
-                cmd = f"{base_cmd}{specific_cmd} > {log_file}_{suffix}.log 2>&1 &"
+                cmd = f"{base_cmd.replace('nohup ', '')}{specific_cmd}"
                 
-                print(f'{log_file}_{suffix}.log')
+                print(cmd)
                 os.system(cmd)
 

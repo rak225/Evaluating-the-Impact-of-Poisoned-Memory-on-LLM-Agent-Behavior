@@ -1,14 +1,17 @@
 injection_method: memory_attack
+
 attack_tool:
-  - all
+  - test
   # - agg
   # - non-agg
   # - test
+
 read_db: true # true,false
 
 llms:
-  - gpt-4o-mini
-  - gpt-3.5-turbo
+  - ollama/llama3.2:3b
+  # - gpt-4o-mini
+  # - gpt-3.5-turbo
   # - gpt-4o-2024-08-06
   # - claude-3-5-sonnet-20240620
   # - ollama/qwen2:72b
@@ -27,6 +30,5 @@ attack_types:
   # - fake_completion
   # - escape_characters
   # - naive
-
 
 # suffix: test2
