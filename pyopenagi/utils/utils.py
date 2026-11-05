@@ -22,6 +22,13 @@ def parse_global_args():
     parser.add_argument("--agent_log_mode", type=str, default="console", choices=["console", "file"])
     parser.add_argument("--llm_kernel_log_mode", type=str, default="console", choices=["console", "file"])
 
+    parser.add_argument(
+        "--retrieval_k",
+        type=int,
+        default=1,
+        help="Number of memories retrieved from Chroma",
+    )
+
     return parser
 
 def extract_before_parenthesis(s: str) -> str:

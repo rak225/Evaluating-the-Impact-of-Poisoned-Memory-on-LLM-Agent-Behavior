@@ -157,3 +157,13 @@ cython_debug/
 memory_db/pre
 pyopenagi/api_key.py
 .env.example
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+.venv/
+
+# Python generated files
+__pycache__/
+*.pyc

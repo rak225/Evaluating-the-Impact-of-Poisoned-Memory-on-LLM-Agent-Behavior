@@ -14,6 +14,9 @@ if __name__ == '__main__':
     attack_tool_types = cfg.get('attack_tool', None)
     write_db = cfg.get('write_db', None)
     read_db = cfg.get('read_db', None)
+    retrieval_k = int(cfg.get("retrieval_k", 1))
+    if retrieval_k < 1:
+        raise ValueError("retrieval_k must be at least 1")
     defense_type = cfg.get('defense_type', None)
     injection_method = cfg['injection_method'] # 'direct_prompt_injection', 'memory_attack', 'observation_prompt_injection', 'clean'
     attack_types = cfg.get('attack_types', None)
@@ -57,6 +60,7 @@ if __name__ == '__main__':
                     base_cmd += ' --write_db'
                 if read_db:
                     base_cmd += ' --read_db'
+                    base_cmd += f" --retrieval_k {retrieval_k}"
                 if defense_type:
                     base_cmd += f' --defense_type {defense_type}'
 

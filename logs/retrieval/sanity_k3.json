@@ -1,0 +1,30 @@
+{
+  "retrieval_k": 3,
+  "retrieved_count": 3,
+  "retrieved_memories": [
+    {
+      "rank": 1,
+      "memory_id": "m1",
+      "score": 0.1,
+      "has_workflow": true,
+      "is_poisoned": false
+    },
+    {
+      "rank": 2,
+      "memory_id": "m2",
+      "score": 0.2,
+      "has_workflow": true,
+      "is_poisoned": false
+    },
+    {
+      "rank": 3,
+      "memory_id": "m3",
+      "score": 0.3,
+      "has_workflow": true,
+      "is_poisoned": true
+    }
+  ],
+  "poisoned_count": 1,
+  "poisoned_fraction": 0.3333333333333333,
+  "poison_exposed": true
+}

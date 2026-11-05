@@ -1,0 +1,26 @@
+[
+  {
+    "k": 1,
+    "retrieved_count": 1,
+    "poisoned_count": null,
+    "workflow_available": true
+  },
+  {
+    "k": 3,
+    "retrieved_count": 3,
+    "poisoned_count": null,
+    "workflow_available": true
+  },
+  {
+    "k": 5,
+    "retrieved_count": 5,
+    "poisoned_count": null,
+    "workflow_available": true
+  },
+  {
+    "k": 10,
+    "retrieved_count": 10,
+    "poisoned_count": null,
+    "workflow_available": true
+  }
+]
