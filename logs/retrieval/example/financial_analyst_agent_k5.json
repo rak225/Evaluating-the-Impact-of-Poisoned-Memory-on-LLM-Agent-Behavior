@@ -1,0 +1,44 @@
+{
+  "retrieval_k": 5,
+  "retrieved_count": 5,
+  "retrieved_memories": [
+    {
+      "rank": 1,
+      "memory_id": null,
+      "score": 0.19296975433826447,
+      "has_workflow": true,
+      "is_poisoned": null
+    },
+    {
+      "rank": 2,
+      "memory_id": null,
+      "score": 0.19296975433826447,
+      "has_workflow": true,
+      "is_poisoned": null
+    },
+    {
+      "rank": 3,
+      "memory_id": null,
+      "score": 0.20377731323242188,
+      "has_workflow": true,
+      "is_poisoned": null
+    },
+    {
+      "rank": 4,
+      "memory_id": null,
+      "score": 0.2054472267627716,
+      "has_workflow": true,
+      "is_poisoned": null
+    },
+    {
+      "rank": 5,
+      "memory_id": null,
+      "score": 0.20705047249794006,
+      "has_workflow": true,
+      "is_poisoned": null
+    }
+  ],
+  "poisoned_count": null,
+  "poisoned_fraction": null,
+  "poison_exposed": null
+}
