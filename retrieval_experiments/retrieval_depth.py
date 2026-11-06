@@ -38,10 +38,10 @@ def retrieve_workflows(vectorstore, query, k=1):
         # Record retrieval information
         record = {
             "rank": rank,
-            "memory_id": doc.metadata.get("id"),
+            "memory_id": doc.metadata.get("id", doc.metadata.get("source_id")),
             "score": float(score),
             "has_workflow": match is not None,
-            "is_poisoned": doc.metadata.get("is_poisoned"),
+            "is_poisoned": doc.metadata.get("poisoned", doc.metadata.get("is_poisoned")),
         }
 
         records.append(record)

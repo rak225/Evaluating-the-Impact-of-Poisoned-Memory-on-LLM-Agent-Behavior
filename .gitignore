@@ -167,3 +167,6 @@ pyopenagi/api_key.py
 # Python generated files
 __pycache__/
 *.pyc
+
+# Generated controlled poison-rate Chroma databases
+memory_db/controlled_poison_rate_sweep/rate_*/
