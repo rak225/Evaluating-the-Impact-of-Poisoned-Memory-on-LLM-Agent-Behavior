@@ -1,0 +1,5 @@
+﻿WARNING: no clean control found, PNA/NRP left blank
+ poison%   k    n    ASR    PNA    NRP
+     100   1    1  0.000    nan    nan
+
+wrote results/sanity_check/summary.csv
