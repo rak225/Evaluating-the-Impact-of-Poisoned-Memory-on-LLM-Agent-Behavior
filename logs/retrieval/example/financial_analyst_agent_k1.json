@@ -4,13 +4,13 @@
   "retrieved_memories": [
     {
       "rank": 1,
-      "memory_id": null,
-      "score": 0.19296975433826447,
+      "memory_id": "0480f91f-b9fd-4d78-a03c-0295eb54b2b8",
+      "score": 0.16961540281772614,
       "has_workflow": true,
-      "is_poisoned": null
+      "is_poisoned": false
     }
   ],
-  "poisoned_count": null,
-  "poisoned_fraction": null,
-  "poison_exposed": null
+  "poisoned_count": 0,
+  "poisoned_fraction": 0.0,
+  "poison_exposed": false
 }

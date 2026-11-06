@@ -4,6 +4,7 @@ import random
 import re
 import shutil
 from pathlib import Path
+import httpx2
 
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
@@ -134,7 +135,10 @@ def main():
     random.seed(SEED)
 
     embeddings = OpenAIEmbeddings(
-        openai_api_key=os.getenv("OPENAI_API_KEY")
+        openai_api_key=os.getenv("OPENAI_API_KEY"),
+        http_client=httpx2.Client(
+            headers={"Accept-Encoding": "identity"}
+        )
     )
 
     source_db = Chroma(

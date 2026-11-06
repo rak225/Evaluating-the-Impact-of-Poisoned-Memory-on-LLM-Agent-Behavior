@@ -4,41 +4,41 @@
   "retrieved_memories": [
     {
       "rank": 1,
-      "memory_id": null,
-      "score": 0.19296975433826447,
+      "memory_id": "0480f91f-b9fd-4d78-a03c-0295eb54b2b8",
+      "score": 0.16961540281772614,
       "has_workflow": true,
-      "is_poisoned": null
+      "is_poisoned": false
     },
     {
       "rank": 2,
-      "memory_id": null,
-      "score": 0.19296975433826447,
+      "memory_id": "60bfbb1b-ae67-4b3c-9594-c02e10c07ec5",
+      "score": 0.16971179842948914,
       "has_workflow": true,
-      "is_poisoned": null
+      "is_poisoned": false
     },
     {
       "rank": 3,
-      "memory_id": null,
-      "score": 0.20377731323242188,
+      "memory_id": "db959c67-3bfd-42f9-b358-d87f101f37dd",
+      "score": 0.16971179842948914,
       "has_workflow": true,
-      "is_poisoned": null
+      "is_poisoned": false
     },
     {
       "rank": 4,
-      "memory_id": null,
-      "score": 0.2054472267627716,
+      "memory_id": "cb51007d-fdce-466d-8417-6d27293d996e",
+      "score": 0.16974122822284698,
       "has_workflow": true,
-      "is_poisoned": null
+      "is_poisoned": false
     },
     {
       "rank": 5,
-      "memory_id": null,
-      "score": 0.20705047249794006,
+      "memory_id": "3690710e-d0d7-4d89-ac6d-0317ac4cb98c",
+      "score": 0.16974122822284698,
       "has_workflow": true,
-      "is_poisoned": null
+      "is_poisoned": false
     }
   ],
-  "poisoned_count": null,
-  "poisoned_fraction": null,
-  "poison_exposed": null
+  "poisoned_count": 0,
+  "poisoned_fraction": 0.0,
+  "poison_exposed": false
 }
