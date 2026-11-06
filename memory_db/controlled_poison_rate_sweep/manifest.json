@@ -1,0 +1,56 @@
+{
+  "seed": 42,
+  "target_memory_count": 100,
+  "source_database": "memory_db\\direct_prompt_injection\\combined_attack_gpt-4o-mini",
+  "label_method": "paired provenance-based synthetic clean controls",
+  "conditions": [
+    {
+      "poison_rate": 0.0,
+      "poison_percent": 0,
+      "total_memories": 100,
+      "clean_memories": 100,
+      "poisoned_memories": 0,
+      "database": "memory_db\\controlled_poison_rate_sweep\\rate_0"
+    },
+    {
+      "poison_rate": 0.1,
+      "poison_percent": 10,
+      "total_memories": 100,
+      "clean_memories": 90,
+      "poisoned_memories": 10,
+      "database": "memory_db\\controlled_poison_rate_sweep\\rate_10"
+    },
+    {
+      "poison_rate": 0.25,
+      "poison_percent": 25,
+      "total_memories": 100,
+      "clean_memories": 75,
+      "poisoned_memories": 25,
+      "database": "memory_db\\controlled_poison_rate_sweep\\rate_25"
+    },
+    {
+      "poison_rate": 0.5,
+      "poison_percent": 50,
+      "total_memories": 100,
+      "clean_memories": 50,
+      "poisoned_memories": 50,
+      "database": "memory_db\\controlled_poison_rate_sweep\\rate_50"
+    },
+    {
+      "poison_rate": 0.75,
+      "poison_percent": 75,
+      "total_memories": 100,
+      "clean_memories": 25,
+      "poisoned_memories": 75,
+      "database": "memory_db\\controlled_poison_rate_sweep\\rate_75"
+    },
+    {
+      "poison_rate": 1.0,
+      "poison_percent": 100,
+      "total_memories": 100,
+      "clean_memories": 0,
+      "poisoned_memories": 100,
+      "database": "memory_db\\controlled_poison_rate_sweep\\rate_100"
+    }
+  ]
+}
