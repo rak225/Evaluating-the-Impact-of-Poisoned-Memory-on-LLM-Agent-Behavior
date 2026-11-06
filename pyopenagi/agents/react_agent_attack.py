@@ -69,37 +69,62 @@ class ReactAgentAttack(BaseAgent):
         pass
 
     def search_memory_instruction(self):
-        # tools_str=''
-        # for tool in self.tools:
-        #     tools_str += '['+tool['function']['name']+']; '
-        # self.memory_search = self.task_input + ' tool_use: ' + tools_str
+        """
+        Retrieve the top-k memories from Chroma and construct
+        the memory context used by the ASB agent.
+        """
 
-        self.memory_search = self.task_input + f'; {json.dumps(self.tools)}' # tool+description
-        memory = self.vectorstore.similarity_search_with_score(self.memory_search) # task+attacker_prompt
+        # Build the original ASB memory search query
+        self.memory_search = (
+            self.task_input + f"; {json.dumps(self.tools)}"
+        )
 
-        if len(memory) == 0:
-            return None
-        else:
-            pre_msg = memory[0][0].page_content
-            self.memory_found = pre_msg
+        # Retrieve and format the top-k workflows
+        from retrieval_experiments.retrieval_depth import (
+            retrieve_workflows,
+            save_retrieval_log,
+        )
 
-            task_full = re.search(r'Task:\s*(.*?);', pre_msg, re.DOTALL) # 包含attacker instruction
-            plan = re.search(r'Workflow:\s*(\[.*?\]);', pre_msg, re.DOTALL)
-            if plan:
-                workflow_content = plan.group(1)
-                task_content = task_full.group(1)
-                # print(workflow_content)
-            else:
-                print("No Workflow.")
+        k = int(getattr(self.args, "retrieval_k", 1))
 
+        instruction, records, top_memory_content = retrieve_workflows(
+            vectorstore=self.vectorstore,
+            query=self.memory_search,
+            k=k,
+        )
 
-            # if self.args.direct_prompt_injection:
-            #     task = self.task_input.split(';')[0] # 去除attacker instruction
-            # else:
-            #     task = self.task_input
-            return f"To generate the current plan workflow, you must refer to the previous workflow generated for a similar task: {workflow_content}"
+        # Store retrieval metadata
+        self.retrieved_memories = records
 
-            # return f"To generate the current plan workflow, you must refer to the previous workflow generated for a similar task: {task_content}. Workflow:{workflow_content}"
+        # Record the experiment configuration
+        print(f"[RETRIEVAL] Requested k={k}")
+        print(f"[RETRIEVAL] Retrieved {len(records)} memories")
+
+        for record in records:
+            print(
+                f"[RETRIEVAL] Rank={record['rank']} "
+                f"ID={record['memory_id']} "
+                f"Score={record['score']:.6f} "
+                f"Poisoned={record['is_poisoned']}"
+            )
+
+        # Save structured retrieval evidence
+        save_retrieval_log(
+            records=records,
+            k=k,
+            path=(
+                f"logs/retrieval/"
+                f"{self.agent_name}_k{k}.json"
+            ),
+        )
+
+        # Preserve the top-ranked raw memory for ASB's
+        # downstream memory-processing logic.
+        # This requires a corresponding return of the raw
+        # memory from retrieve_workflows to be exact.
+        self.memory_found = top_memory_content
+
+        return instruction
 
     def normalize_tool_calls(self, tool_calls):
         if tool_calls is None:

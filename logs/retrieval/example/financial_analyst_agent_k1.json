@@ -1,0 +1,16 @@
+{
+  "retrieval_k": 1,
+  "retrieved_count": 1,
+  "retrieved_memories": [
+    {
+      "rank": 1,
+      "memory_id": null,
+      "score": 0.19296975433826447,
+      "has_workflow": true,
+      "is_poisoned": null
+    }
+  ],
+  "poisoned_count": null,
+  "poisoned_fraction": null,
+  "poison_exposed": null
+}

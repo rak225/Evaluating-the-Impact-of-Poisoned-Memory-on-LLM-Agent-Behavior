@@ -32,3 +32,5 @@ attack_types:
   # - naive
 
 # suffix: test2
+# Number of memories retrieved per query
+retrieval_k: 1

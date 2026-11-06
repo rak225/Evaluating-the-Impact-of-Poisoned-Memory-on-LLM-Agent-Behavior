@@ -103,6 +103,7 @@ def main():
     # parse arguments and set configuration for this run accordingly
     warnings.filterwarnings("ignore")
     parser = parse_global_args()
+    parser.add_argument("--retrieval_k", type=int, default=1)
     args = parser.parse_args()
     print(args)
     llm_name = args.llm_name
