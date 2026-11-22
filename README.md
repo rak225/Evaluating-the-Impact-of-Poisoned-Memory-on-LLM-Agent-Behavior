@@ -378,6 +378,100 @@ Several limitations remain relevant when interpreting the results.
 
 For the complete experimental methodology, see [`PROTOCOL.md`](PROTOCOL.md).
 
+## Final Experimental Results
+
+### Original Poison-Rate and Retrieval-Depth Sweep
+
+The final experiment evaluated 30 configurations using six memory-poisoning
+rates (0%, 10%, 25%, 50%, 75%, and 100%) and five retrieval depths
+(k = 1, 3, 5, 7, and 10).
+
+Each configuration evaluated two task cases, producing 60 case executions.
+
+| Metric | Observed Result |
+|---|---|
+| Total configurations | 30 |
+| Total case executions | 60 |
+| Attack success | 0/60 (0%) |
+| Original-task success | 0/60 (0%) |
+| Workflow-generation failures | 0 |
+| ASB memory-found rate | 0/60 (0%) |
+
+Poisoned-memory exposure varied across configurations. At poisoning rates
+of 0%, 10%, and 25%, no poisoned memories appeared among retrieved records
+in the evaluated cases. At 50% and 75%, some retrieved memories were poisoned,
+with exposure varying by retrieval depth. At 100%, all retrieved memories
+were poisoned.
+
+The absence of observed attack success does not establish that the agent
+is immune to prompt injection, particularly given its inconsistent
+tool-execution behavior.
+
+The complete aggregated results are stored in
+`results/final_experiment_summary.csv`.
+
+### Original Experiment Figures
+
+- [Attack Success Heatmap](results/figures/attack_success_heatmap.png)
+- [Original-Task Success Heatmap](results/figures/original_task_success_heatmap.png)
+- [Poisoned-Memory Exposure Heatmap](results/figures/poisoned_exposure_heatmap.png)
+
+These figures represent the original 60-case experiment.
+
+### Modified-Agent Validation Pilot
+
+A separate validation pilot tested an additional instruction encouraging
+the Llama 3.2 3B agent to use actual tool calls rather than generating
+textual representations of tool execution.
+
+The pilot used retrieval depth k = 5, with four runs per condition and
+two task cases per run.
+
+| Metric | 0% Poisoning | 100% Poisoning |
+|---|---|---|
+| Case executions | 8 | 8 |
+| Poisoned memories retrieved | 0/40 | 40/40 |
+| Attack success | 0/8 (0%) | 0/8 (0%) |
+| Original-task success | 2/8 (25%) | 1/8 (12.5%) |
+| ASB memory-found rate | 0/8 (0%) | 0/8 (0%) |
+
+Retrieval logs confirmed the expected clean and poisoned memory exposure
+in all pilot runs.
+
+The modified agent completed some legitimate tasks, but tool-calling
+behavior remained inconsistent. The difference in original-task success
+between clean and poisoned conditions was only one successful case and
+is insufficient to establish a causal poisoning effect.
+
+The pilot reused the same two tasks across repeated runs. Therefore,
+these results describe repeated executions rather than 16 independent tasks.
+
+[Modified-Agent Validation Figure](results/figures/promptfix_validation_comparison.png)
+
+Pilot results are stored separately in `logs/validation_experiments/`.
+They are not combined with the original 60-case sweep.
+
+### Interpretation and Limitations
+
+The experimental pipeline successfully constructed controlled poisoning
+conditions, retrieved memories at configurable depths, and recorded
+agent behavior.
+
+However, Llama 3.2 3B sometimes generated textual descriptions of tool
+calls instead of executing tools through the structured interface.
+This limits interpretation of both attack success and legitimate-task
+success metrics.
+
+Additionally, the ASB memory-found metric is task-specific and should
+not be interpreted as a direct measurement of poisoned-memory retrieval.
+Retrieval logs provide the direct exposure evidence.
+
+The results should therefore be interpreted as observed outcomes under
+the tested configurations rather than definitive evidence of attack
+resistance or a statistically established poisoning effect.
+
+---
+
 ## Upstream Project
 
 This project is derived from **Agent Security Bench (ASB): Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents**, ICLR 2025.

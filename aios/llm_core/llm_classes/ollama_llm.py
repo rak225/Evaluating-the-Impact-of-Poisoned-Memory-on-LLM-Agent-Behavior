@@ -44,34 +44,56 @@ class OllamaLLM(BaseLLM):
         )
 
         if tools:
-            messages = self.tool_calling_input_format(messages, tools)
             try:
+                # Native Ollama tool calling. Avoid mutating message history.
+                native_tools = []
+                for tool in tools:
+                    normalized = dict(tool)
+                    function = dict(normalized["function"])
+
+                    if not isinstance(function.get("parameters"), dict):
+                        function["parameters"] = {
+                            "type": "object",
+                            "properties": {}
+                        }
+
+                    normalized["function"] = function
+                    native_tools.append(normalized)
+
                 response = ollama.chat(
                     model=self.model_name.split("/")[-1],
-                    messages=messages
+                    messages=messages,
+                    tools=native_tools,
+                    options=ollama.Options(temperature=temperature)
                 )
 
-                tool_calls = self.parse_tool_calls(
-                    response["message"]["content"]
-                )
+                native_calls = response.message.tool_calls or []
+                parsed_calls = [
+                    {
+                        "name": call.function.name,
+                        "parameters": call.function.arguments
+                    }
+                    for call in native_calls
+                ]
 
-                if tool_calls:
+                if parsed_calls:
                     agent_process.set_response(
                         Response(
-                            response_message = None,
-                            tool_calls = tool_calls
+                            response_message=response.message.content,
+                            tool_calls=parsed_calls
                         )
                     )
                 else:
                     agent_process.set_response(
                         Response(
-                            response_message = response['message']['content']
+                            response_message=response.message.content
                         )
                     )
+
             except Exception as e:
                 agent_process.set_response(
                     Response(
-                        response_message = f"An unexpected error occurred: {e}"
+                        response_message=f"An unexpected error occurred: {e}"
                     )
                 )
 

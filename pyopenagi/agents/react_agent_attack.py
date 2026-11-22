@@ -202,7 +202,7 @@ class ReactAgentAttack(BaseAgent):
 
         for tool_call in executable_calls:
             function_name = tool_call.get("name")
-            function_params = None
+            function_params = tool_call.get("parameters")
             function_to_call = self.tool_list.get(function_name)
             self.logger.log(f"The current tool called is {function_to_call}, parameter:{function_params}\n", level="info")
 
@@ -350,7 +350,17 @@ class ReactAgentAttack(BaseAgent):
                 tool_use = step["tool_use"]
 
                 prompt = f"At step {self.rounds + 1}, you need to {message} "
-                self.messages.append({"role": "user","content": prompt})
+
+                if tool_use:
+                    prompt += (
+                        "Use the provided structured tool-calling interface to invoke "
+                        "the appropriate tool for this step. "
+                        "Do not write or simulate [Action] or [Observation] messages "
+                        "in your text response. "
+                        "A tool is only considered used when you issue an actual tool call."
+                    )
+
+                self.messages.append({"role": "user", "content": prompt})
 
                 used_tools = self.tools if tool_use else None
 
