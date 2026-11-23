@@ -11,3 +11,17 @@ torch
 transformers
 accelerate
 anthropic
+chromadb
+langchain-chroma
+langchain-core
+langchain-openai
+langchain-ollama
+python-dotenv
+diffusers
+arxiv
+httpx2
+jsonlines
+matplotlib
+numpy
+requests
+tqdm
