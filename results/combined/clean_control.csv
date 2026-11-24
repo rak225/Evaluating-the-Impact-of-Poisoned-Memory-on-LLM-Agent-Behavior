@@ -1,0 +1,5 @@
+source,n_runs,attack_successes,task_success
+grid p0 (k=1..10),10,0,0.000
+repeated p0 k5 (5 runs),10,0,0.400
+targeted clean k5 (5 runs),5,0,0.600
+POOLED (PNA),25,0,0.280
